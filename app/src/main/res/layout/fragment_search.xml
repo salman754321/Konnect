@@ -25,6 +25,7 @@
     android:src="@drawable/ic_search_light"
         />
     <EditText
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/searchbar"
@@ -34,4 +35,10 @@
         android:hint="Search ..."/>
     </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bar"
+        android:id="@+id/recycler_view"/>
 </RelativeLayout>
