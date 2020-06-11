@@ -49,7 +49,7 @@ public class SearchFragment extends Fragment {
       userList=new ArrayList<>(  );
       userAdapter=new UserAdapter( getContext(), userList );
       recyclerView.setAdapter( userAdapter );
-    readUsers();
+        readUsers();
    searchbar.addTextChangedListener( new TextWatcher() {
        @Override
        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -58,7 +58,7 @@ public class SearchFragment extends Fragment {
 
        @Override
        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        searchUser( s.toString().toLowerCase() );
+       searchUser( s.toString().toLowerCase() );
        }
 
        @Override
@@ -74,7 +74,7 @@ public class SearchFragment extends Fragment {
 
     private void searchUser(String s)
     {
-        Query queery= FirebaseDatabase.getInstance().getReference("Users").orderByChild( "username" ).startAt( s ).endAt( s+"\uf8ff" );
+        Query queery= FirebaseDatabase.getInstance().getReference("Users").orderByChild( "UserName" ).startAt( s ).endAt( s+"\uf8ff" );
 
         queery.addValueEventListener( new ValueEventListener() {
             @Override

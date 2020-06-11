@@ -27,7 +27,7 @@
         android:background="@drawable/edittext_background"
         android:layout_marginTop="15dp"
         android:padding="10dp"
-        android:inputType="textPassword"
+
         android:hint="Full Name"
         android:id="@+id/fullname"/>
 
@@ -47,6 +47,7 @@
         android:background="@drawable/edittext_background"
         android:layout_marginTop="15dp"
         android:padding="10dp"
+        android:inputType="textPassword"
         android:hint="Password"
         android:id="@+id/password"/>
 

@@ -11,7 +11,7 @@
         android:id="@+id/bar"
         android:background="?android:attr/windowBackground"
         >
-    
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,11 +34,11 @@
         android:layout_marginLeft="10dp"
         android:hint="Search ..."/>
     </androidx.appcompat.widget.Toolbar>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bar"
-        android:id="@+id/recycler_view"/>
 </RelativeLayout>

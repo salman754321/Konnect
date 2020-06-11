@@ -1,15 +1,15 @@
 package com.Konnect.App.Model;
 
 public class User {
-    private  String id;
-    private  String userName;
+    private  String UserId;
+    private  String UserName;
     private  String Bio;
     private  String ImageUrl;
     private  String FullName;
 
-    public User(String id, String userName, String bio, String imageUrl, String fullName) {
-        this.id = id;
-        this.userName = userName;
+    public User(String userId, String userName, String bio, String imageUrl, String fullName) {
+        UserId = userId;
+        UserName = userName;
         Bio = bio;
         ImageUrl = imageUrl;
         FullName = fullName;
@@ -18,20 +18,21 @@ public class User {
     public User(){
 
     }
-    public String getId() {
-        return id;
+
+    public String getUserId() {
+        return UserId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        UserId = userId;
     }
 
     public String getUserName() {
-        return userName;
+        return UserName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        UserName = userName;
     }
 
     public String getBio() {
