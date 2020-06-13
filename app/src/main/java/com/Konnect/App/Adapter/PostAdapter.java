@@ -81,8 +81,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         isLiked( post.getPostId(),holder.like );
         nrlikes( holder.likes,post.getPostId() );
         getComments( post.getPostId(),holder.comments);
+        isSaved( post.getPostId(),holder.save );
 
 
+
+        holder.save.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.save.getTag().equals( "save" )){
+                    FirebaseDatabase.getInstance().getReference().child( "Saves" ).child( firebaseUser.getUid() ).child( post.getPostId() ).setValue( true );
+                }else{
+                    FirebaseDatabase.getInstance().getReference().child( "Saves" ).child( firebaseUser.getUid() ).child( post.getPostId() ).removeValue();
+
+                }
+            }
+        } );
         holder.like.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,5 +214,27 @@ private void publisherInfo(final ImageView image_profile, final TextView usernam
 
         }
     } );
-}
+    }
+        private  void isSaved(final String postid, final ImageView imageView)
+        {
+            FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+            DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child( "Saves" ).child( firebaseUser.getUid() );
+            ref.addValueEventListener( new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child( postid ).exists()){
+                        imageView.setTag( "saved" );
+                        imageView.setImageResource( R.drawable.ic_save_post );
+                    }else{
+                        imageView.setImageResource( R.drawable.ic_savepost );
+                        imageView.setTag( "save" );
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            } );
+        }
 }

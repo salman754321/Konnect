@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle intent=getIntent().getExtras();
         if(intent!=null){
-            String publisherid=intent.getString( "publisherid" );
+            String publisher=intent.getString( "publisherid" );
 
             SharedPreferences.Editor editor=getSharedPreferences( "PREPS",MODE_PRIVATE ).edit();
-            editor.putString( "profileid",publisherid );
+            editor.putString( "profileid",publisher );
             editor.apply();
 
             getSupportFragmentManager().beginTransaction().replace( R.id.fragment_container,new ProfileFragment() ).commit();
@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
                     selectdFragment=new NotificationFragment();
                     break;
                 case R.id.nav_profile:
-                    SharedPreferences.Editor editor=getSharedPreferences( "PRESPS",MODE_PRIVATE ).edit();
-                    editor.putString( "ProfileId", FirebaseAuth.getInstance().getCurrentUser().getUid() );
+                    SharedPreferences.Editor editor=getSharedPreferences( "PREPS",MODE_PRIVATE ).edit();
+                    editor.putString( "profileid", FirebaseAuth.getInstance().getCurrentUser().getUid() );
                     editor.apply();
                     selectdFragment=new ProfileFragment();
                     break;
