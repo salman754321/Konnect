@@ -40,8 +40,8 @@ public class PostDetailFragment extends Fragment {
         View view =inflater.inflate( R.layout.fragment_post_detail, container, false );
         SharedPreferences Preferences=getContext().getSharedPreferences( "PREPS" , Context.MODE_PRIVATE );
         postid=Preferences.getString( "postid","none" );
-        recyclerView=container.findViewById( R.id.recycler_view );
-        recyclerView.setHasFixedSize( true );
+        recyclerView=view.findViewById( R.id.recycler_view );
+      recyclerView.setHasFixedSize( true );
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager( getContext() );
         recyclerView.setLayoutManager( linearLayoutManager );
         postList=new ArrayList<>(  );
