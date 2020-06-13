@@ -27,7 +27,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView( R.layout.activity_main );
         bottomNavigationView=findViewById( R.id.bottom_navigation );
         bottomNavigationView.setOnNavigationItemSelectedListener( navigatioItemSelectedListner );
-        getSupportFragmentManager().beginTransaction().replace( R.id.fragment_container,new HomeFragment() ).commit();
+
+        Bundle intent=getIntent().getExtras();
+        if(intent!=null){
+            String publisherid=intent.getString( "publisherid" );
+
+            SharedPreferences.Editor editor=getSharedPreferences( "PREPS",MODE_PRIVATE ).edit();
+            editor.putString( "profileid",publisherid );
+            editor.apply();
+
+            getSupportFragmentManager().beginTransaction().replace( R.id.fragment_container,new ProfileFragment() ).commit();
+        }else{
+            getSupportFragmentManager().beginTransaction().replace( R.id.fragment_container,new HomeFragment() ).commit();
+        }
+
+
     }
 
 
