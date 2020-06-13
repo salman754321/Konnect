@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                     hashMap.put( "UserName",aasername.toLowerCase() );
                     hashMap.put("FullName",Fullname);
                     hashMap.put("Bio","");
-                    hashMap.put( "ImageUrl","https://firebasestorage.googleapis.com/v0/b/konnect-9b405.appspot.com/o/30-307416_profile-icon-png-image-free-download-searchpng-employee.png?alt=media&token=9e7a2360-49d1-40b0-91c9-5b2721959557" )
+                    hashMap.put( "ImageUrl","https://firebasestorage.googleapis.com/v0/b/konnect-9b405.appspot.com/o/30-307416_profile-icon-png-image-free-download-searchpng-employee.png?alt=media&token=3556bce8-2238-4e20-be26-55860dd8a654" )
                     ;
                     reference.setValue( hashMap ).addOnCompleteListener( new OnCompleteListener<Void>() {
                         @Override
