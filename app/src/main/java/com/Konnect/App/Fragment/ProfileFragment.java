@@ -1,6 +1,7 @@
 package com.Konnect.App.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -20,10 +21,12 @@ import android.widget.TextView;
 
 import com.Konnect.App.Adapter.MyPhotoAdapter;
 import com.Konnect.App.Adapter.PostAdapter;
+import com.Konnect.App.EditProfileActivity;
 import com.Konnect.App.Model.Post;
 import com.Konnect.App.Model.User;
 import com.Konnect.App.R;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,7 +43,7 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
-    ImageView image_profile,option;
+    ImageView image_profilee,option;
     TextView post,followers,following,bio,username,fullname;
     Button edit_profile;
     String profileid;
@@ -65,7 +68,7 @@ public class ProfileFragment extends Fragment {
         SharedPreferences prefs=getContext().getSharedPreferences( "PREPS", Context.MODE_PRIVATE );
         profileid=prefs.getString( "profileid","none" );
         //prefs.edit().clear().commit();
-        image_profile=view.findViewById( R.id.image_profile );
+        image_profilee=view.findViewById( R.id.image_profile );
         option=view.findViewById( R.id.option );
         post=view.findViewById( R.id.posts );
         followers=view.findViewById( R.id.followers );
@@ -114,7 +117,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(edit_profile.getText().toString().equals( "Edit Profile" )){
-                    //
+                    startActivity( new Intent( getContext(), EditProfileActivity.class ) );
                 }else  if(edit_profile.getText().toString().equals( "follow" )){
                     FirebaseDatabase.getInstance().getReference().child("Follow").child( firebaseUser.getUid() ).child("following").child( profileid).setValue( true );
                     FirebaseDatabase.getInstance().getReference().child("Follow").child( profileid ).child("followers").child( firebaseUser.getUid() ).setValue( true );
@@ -155,7 +158,7 @@ public class ProfileFragment extends Fragment {
                     return ;
                 }
                 User user=dataSnapshot.getValue(User.class);
-                Glide.with( getContext() ).load( user.getImageUrl() ).load( image_profile );
+                Glide.with( getContext() ).load( user.getImageUrl() ).into( image_profilee );
                 username.setText( user.getUserName() );
                 bio.setText( user.getBio() );
                 fullname.setText( user.getFullName() );
