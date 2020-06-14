@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -81,12 +82,25 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                 if(holder.btn_follow.getText().toString().equals( "follow" )){
                      FirebaseDatabase.getInstance().getReference().child("Follow").child( firebaseUser.getUid() ).child("following").child( user.getUserId() ).setValue( true );
                     FirebaseDatabase.getInstance().getReference().child("Follow").child( user.getUserId() ).child("followers").child( firebaseUser.getUid() ).setValue( true );
+                    addNotification( user.getUserId() );
                 }else{
                     FirebaseDatabase.getInstance().getReference().child("Follow").child( firebaseUser.getUid() ).child("following").child( user.getUserId() ).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child( user.getUserId() ).child("followers").child( firebaseUser.getUid() ).removeValue();
                 }
             }
         } );
+    }
+    private  void addNotification(String userid)
+    {
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference( "Notifications" ).child( userid );
+
+        HashMap<String,Object> hashMap =new HashMap<>(  );
+        FirebaseUser firebaseUser=FirebaseAuth.getInstance( ).getCurrentUser() ;
+        hashMap.put("userid",firebaseUser.getUid());
+        hashMap.put( "text","Started Following you" );
+        hashMap.put( "postid","" );
+        hashMap.put( "ispost",false );
+        ref.push().setValue( hashMap );
     }
 
     @Override

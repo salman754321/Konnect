@@ -38,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -127,6 +128,7 @@ public class ProfileFragment extends Fragment {
                 }
             }
         } );
+
 
         my_photos.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -286,6 +288,18 @@ public class ProfileFragment extends Fragment {
 
             }
         } );
+    }
+    private  void addNotification(String userid,String postid)
+    {
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference( "Notifications" ).child( profileid );
+
+        HashMap<String,Object> hashMap =new HashMap<>(  );
+        FirebaseUser firebaseUser=FirebaseAuth.getInstance( ).getCurrentUser() ;
+        hashMap.put("userid",firebaseUser.getUid());
+        hashMap.put( "text","Started Following you" );
+        hashMap.put( "postid",postid );
+        hashMap.put( "ispost",false );
+        ref.push().setValue( hashMap );
     }
     private void readSaves(){
         DatabaseReference ref=  FirebaseDatabase.getInstance().getReference("Posts");

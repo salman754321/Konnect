@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -66,7 +67,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final Post post=mPost.get( position );
@@ -150,6 +151,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             public void onClick(View v) {
                 if(holder.like.getTag().equals( "like" )){
                     FirebaseDatabase.getInstance().getReference().child( "Likes" ).child( post.getPostId() ).child( firebaseUser.getUid() ).setValue( true );
+                    addNotification( post.getPublisher(),post.getPostId() );
 
                 }else{
                     FirebaseDatabase.getInstance().getReference().child( "Likes" ).child( post.getPostId() ).child( firebaseUser.getUid() ).removeValue();
@@ -241,6 +243,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         } );
+    }
+
+    private  void addNotification(String userid,String postid)
+    {
+        DatabaseReference ref=FirebaseDatabase.getInstance().getReference( "Notifications" ).child( userid );
+
+        HashMap<String,Object> hashMap =new HashMap<>(  );
+        FirebaseUser firebaseUser=FirebaseAuth.getInstance( ).getCurrentUser() ;
+        hashMap.put("userid",firebaseUser.getUid());
+        hashMap.put( "text","liked your post" );
+        hashMap.put( "postid",postid );
+        hashMap.put( "ispost",true );
+        ref.push().setValue( hashMap );
     }
     private void nrlikes(final TextView like, String postid){
         DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child( "Likes" ).child( postid );
