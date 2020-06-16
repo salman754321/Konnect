@@ -1,5 +1,6 @@
 package com.Konnect.App.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.LinearLayout;
 import com.Konnect.App.Adapter.PostAdapter;
 import com.Konnect.App.Model.Post;
 import com.Konnect.App.R;
+import com.Konnect.App.StartActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,6 +58,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent( getContext(), StartActivity.class ));
             }
         } );
     checkFollowing();

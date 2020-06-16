@@ -25,6 +25,7 @@ import com.Konnect.App.EditProfileActivity;
 import com.Konnect.App.Model.Post;
 import com.Konnect.App.Model.User;
 import com.Konnect.App.R;
+import com.Konnect.App.StartActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.google.firebase.auth.FirebaseAuth;
@@ -109,6 +110,7 @@ public class ProfileFragment extends Fragment {
            @Override
            public void onClick(View v) {
                FirebaseAuth.getInstance().signOut();
+               startActivity(new Intent( getContext(), StartActivity.class ));
            }
        } );
 

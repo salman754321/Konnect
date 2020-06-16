@@ -51,7 +51,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.comment.setText( notification.getText() );
         getUserinfo( holder.profile_image,holder.username,notification.getUserid() );
 
-        if(notification.isPost()){
+        if(notification.isIspost()){
             holder.post_image.setVisibility( View.VISIBLE );
             getPost( holder.post_image,notification.getPostid() );
         }else {
@@ -61,7 +61,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.itemView.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(notification.isPost())
+                if(notification.isIspost())
                 {
                     SharedPreferences.Editor editor=mContext.getSharedPreferences( "PREPS",Context.MODE_PRIVATE ).edit();
                     editor.putString( "postid",notification.getPostid() );
