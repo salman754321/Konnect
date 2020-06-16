@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.Konnect.App.Adapter.PostAdapter;
@@ -31,6 +32,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private PostAdapter postAdapter;
     private List<Post> postList;
+    ImageView option;
     private List<String> followinglist;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +42,7 @@ public class HomeFragment extends Fragment {
         View view=inflater.inflate(  R.layout.fragment_home, container, false);
 
         recyclerView=view.findViewById( R.id.recycler_view );
+        option=view.findViewById( R.id.option );
         recyclerView.setHasFixedSize( true );
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager( getContext() );
         linearLayoutManager.setReverseLayout( true );
@@ -49,6 +52,12 @@ public class HomeFragment extends Fragment {
         postAdapter=new PostAdapter( getContext(),postList );
         recyclerView.setAdapter( postAdapter );
 
+        option.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+            }
+        } );
     checkFollowing();
         return view;
     }

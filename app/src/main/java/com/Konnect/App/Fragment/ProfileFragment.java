@@ -105,6 +105,13 @@ public class ProfileFragment extends Fragment {
        mysaves();
 
 
+       option.setOnClickListener( new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               FirebaseAuth.getInstance().signOut();
+           }
+       } );
+
         if(profileid.equals( firebaseUser.getUid() ))
         {
             edit_profile.setText( "Edit Profile");

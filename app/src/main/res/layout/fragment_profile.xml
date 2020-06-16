@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/option"
-                    android:src="@drawable/ic_option"
+                    android:src="@drawable/ic_logout"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="10dp"
                     android:layout_alignParentRight="true"
